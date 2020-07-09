@@ -17,6 +17,14 @@ Quando analisamos os estilos de interação entre serviços, temos duas dimensõ
 
 #### 3.1.2: Definindo APIs em uma arquitetura de microsserviços
 
+Uma API deve definir uma interface e expor suas funcionalidades sem expor os aspectos de sua implementação. Em uma aplicação monolítica, principalmente em uma linguagme fortemente tipada - como o Java, caso uma interface mude de forma a ficar incompatível com um cliente, a aplicação apresentará erro em tempo de compilação. Embora possa ser trabalhoso, os erros podem ser facilmente encontrados e corrigidos, permitindo a alteração da interface.
+
+Porém, em uma arquitetura de microsserviços, se um serviço muda sua API de forma a ficar incompatível com o que os seus clientes usam atualmente, teremos um problema sério. Como os serviços são independentes e no são compilados juntos - normalmente sendo responsabilidades de times diferentes - a incompatibilidade se manisfetará como erros em tempo de execução, os quais não serão simples de encontrar a causa raiz.
+
+Por isso, a definição da API e suas interfaces é extremamente importante em uma arquitetura de microsserviços, independente dos estilo de comunicação ou immplementaçes escolhidas. Precisa-se ter uma mentalidade de "API-first design" e alinhar muito bem as interfaces da API antes de realizar qualquer tipo de implementação e alteração.
+
+#### 3.1.3: 
+
 ...em progresso...
 
 ### 3.2: Comunicações Síncronas
