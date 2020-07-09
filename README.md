@@ -23,9 +23,24 @@ Porém, em uma arquitetura de microsserviços, se um serviço muda sua API de fo
 
 Por isso, a definição da API e suas interfaces é extremamente importante em uma arquitetura de microsserviços, independente dos estilo de comunicação ou immplementaçes escolhidas. Precisa-se ter uma mentalidade de "API-first design" e alinhar muito bem as interfaces da API antes de realizar qualquer tipo de implementação e alteração.
 
-#### 3.1.3: 
+#### 3.1.3: Evoluindo e Versionando APIs
 
-...em progresso...
+É natural que uma API evolua, adicionando, alterando ou até removendo funcionalidades. Em uma aplicaço monolítica essas mudanças são facilmente rastreadas e naturalmente garantidas para pelo compilador. Porém, quando essa API faz parte de uma arquitetura de microserviços, rastrear e garantir esse alinhamento é extremamente difícil e demanda muito esforço e coordenação.
+
+Como não podemos garantir a adequação dos clientes as nossas APIs, precisamos garantir sua retrocompatibilidade e evitar descontinuar recursos, quando possível. Também temos que pensar que nossa aplicação não costuma ficar "indisponível para manutenção" nem durante os processos de deploy e precisamos pensar inclusive no processo de mudança de uma API, mantendo versões novas e antigas funcionando paralelamente.
+
+Quando fazemos mudanças que são retrocompatíveis - como adicionar atributos opcionais a request, adicionar novos atributos a resposta ou adicionar novos operadores - o cliente do serviço deve ser capaz de lidar com nossa API mesmo após a mudança, seguindo o ["princípio da robustez"](https://en.wikipedia.org/wiki/Robustness_principle). Nesse sentido, os serviços devem definir valores padrões para os atributos faltantes na request enquanto o cliente deve ignorar campos não esperados na resposta.
+
+Porém, quando estamos realizando uma alteração que deixe a API incompatível com a versão anterior, precisamos criar uma nova versão para essa API e garantir o funcionamento da versão antiga de forma a não prejudicar os clientes do serviço. A forma de fazermos isso é com o versionamento da API. Se estivermos trabalhando com uma comunicação baseada no protocolo HTTP - como REST - podemos fazer isso utilizando um prefixo que identifique a versão no caminho da URL do recurso especificado (/v1/... e /v2/..., por exemplo) ou incluir a versão da API na requisição do cliente, como um cabeçalho HTTP.
+
+#### 3.1.4: Formatos das Mensagens
+
+O formato da mensagem na comunicação entre os microsserviços é outro aspecto muito importante. Dependando do mecanismo escolhido para a comunicação, a mensagem pode ter um formato flexível ou pré-definido.
+
+Existem os formatos de mensagem baseado em texto (JSON, XML, etc) que são flexíveis, permitindo que o cliente pegue somente as informaçes esperadas da mensagem e ignore qualquer informaço adicional, o que é ótimo para manutenção da retrocompatibilidade de APIs. Porém, esse formato é muito verboso e envolve muito processamento, não sendo a opção mais performática.
+
+Também existem os formatos de mensagem binários (Avro, Protocol Buffers, etc) que são mais performáticos e garante formatos bem específicos de mensagens, mas necessitam de uma abordagem mais focada no "API-first" pois dificultam a retrocompatibilidade.
+
 
 ### 3.2: Comunicações Síncronas
 
