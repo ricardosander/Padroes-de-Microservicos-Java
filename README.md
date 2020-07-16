@@ -41,9 +41,24 @@ Existem os formatos de mensagem baseado em texto (JSON, XML, etc) que são flex�
 
 Também existem os formatos de mensagem binários (Avro, Protocol Buffers, etc) que são mais performáticos e garantem formatos bem específicos de mensagens, mas necessitam de uma abordagem mais focada no "API-first" pois dificultam a retrocompatibilidade.
 
-### 3.2: Comunicações Síncronas
+### 3.2: Comunicações Síncronas: RPI - Remote Procedure Invocation
 
-...em progresso...
+O padrão RPI (Remote Procedure Invocation - Chamada de Procedimento Remoto) se caracteriza por uma chamada remota onde o cliente faz uma requisição para um serviço, o serviço processa a requisição e devolve uma resposta. Alguns clientes bloqueiam enquanto esperam, enquanto outros podem tratar a resposta de uma forma reativa. Independente disso, o cliente assume que uma resposta será recebida em um deterniado tempo. Essa comunicaço pode ser realizada com protocolos como REST e gRPC.
+
+#### 3.2.1: REST
+
+REST é um procolo moderno, normalmente baseado em HTTP, o qual gira em torno de um resource (recurso) representando um objeto de negócio. O resource é representando na URL e os verbos HTTP são utilizados para manipualção destes resources: GET para recuperar recursos, "POST para criá-los", "PUT pata atualizá-los" e DELETE para indisponibilizá-los. As formais mais comuns de retornar os recursos de uma API são como objeto JSON ou documento XML.
+
+##### O Modelo de Maturidade REST
+
+* Level 0: requisiçes HTTP para uma única URI, especificando ações, alvos e parâmetros
+* Level 1: as URIs identificação recursos (resources) os quais identificam objets de negócio,a requisição ainda precisa identificar a ação e parâmetros
+* Level 2: as ações são especificadas pelos [verbos HTTP](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) e os [códigos de status HTTP](https://httpstatuses.com/) são utilizados para representar as respostas.
+* Level 3: [HATEOS](https://en.wikipedia.org/wiki/HATEOAS) - cada interação diz o próximo passo que pode ser realizado
+
+
+#### 3.2.2: 
+
 
 ### 3.3: Comunicações Assíncronas
 
